@@ -750,6 +750,63 @@ SCRIPTS.update({'REF-5590': [{'thought': 'Fetch the referral record.',
                                    'present.'}}]})
 
 
+def _add_positive_referral_script(case_id, patient_id, specialty, band,
+                                  slot, reason):
+    """Add a compact, deterministic five-step booking script for an extra case."""
+    start = "2026-09-09"
+    windows = {"urgent": "2026-09-23", "soon": "2026-10-07", "routine": "2026-11-04"}
+    SCRIPTS[case_id] = [
+        {"thought": "Fetch the referral record.",
+         "calls": [("get_referral", {"referral_id": case_id})]},
+        {"thought": "Run the independent referral criteria and patient checks.",
+         "calls": [("check_referral_criteria", {"specialty": specialty,
+                                                  "referral_id": case_id}),
+                   ("lookup_patient", {"patient_id": patient_id})]},
+        {"thought": "Query legal slots for the exact specialty, band and window.",
+         "calls": [("get_clinic_slots", {"specialty": specialty, "band": band,
+                                          "from": start, "to": windows[band]})]},
+        {"thought": "Book the selected legal slot through the gated action.",
+         "calls": [("book_slot", {"clinic": slot["clinic"], "date": slot["date"],
+                                   "time": slot["time"], "referral_id": case_id})]},
+        {"thought": "Finish with the booking record.",
+         "final": {"decision": "book", "booked": dict(slot), "reason": reason}},
+    ]
+
+
+_add_positive_referral_script(
+    "REF-6030", "P-2026", "OPH", "routine",
+    {"clinic": "OPH-C2", "date": "2026-10-14", "time": "11:20"},
+    "Routine OPH referral with VF-01 present; booked the first legal slot.")
+_add_positive_referral_script(
+    "REF-6031", "P-2027", "CARD", "routine",
+    {"clinic": "CARD-C2", "date": "2026-10-21", "time": "10:00"},
+    "Routine CARD referral with ECG-12 and BNP-01 present; booked a legal slot.")
+_add_positive_referral_script(
+    "REF-6032", "P-2028", "ORT", "routine",
+    {"clinic": "ORT-C1", "date": "2026-10-07", "time": "09:20"},
+    "Routine ORT referral with XR-KNEE present; booked a legal slot.")
+_add_positive_referral_script(
+    "REF-6033", "P-2029", "DER", "routine",
+    {"clinic": "DER-C1", "date": "2026-09-30", "time": "10:40"},
+    "Routine DER referral; no mandatory tests apply and a legal slot was booked.")
+_add_positive_referral_script(
+    "REF-6034", "P-2030", "ENT", "routine",
+    {"clinic": "ENT-C1", "date": "2026-10-21", "time": "13:20"},
+    "Routine ENT referral with AUD-01 and NASO-02 present; booked a legal slot.")
+_add_positive_referral_script(
+    "REF-6035", "P-2031", "NEU", "routine",
+    {"clinic": "NEU-C2", "date": "2026-10-12", "time": "10:30"},
+    "Routine NEU referral with CT-HEAD present; booked a legal slot.")
+_add_positive_referral_script(
+    "REF-6036", "P-2032", "OPH", "routine",
+    {"clinic": "OPH-C2", "date": "2026-10-14", "time": "14:00"},
+    "Routine OPH referral with VF-01 present; booked a legal slot.")
+_add_positive_referral_script(
+    "REF-6037", "P-2033", "CARD", "soon",
+    {"clinic": "CARD-C3", "date": "2026-09-25", "time": "09:30"},
+    "Soon CARD referral with both mandatory tests present; booked a legal slot.")
+
+
 class ScriptedBackend:
     """Replays SCRIPTS[case_id]. Deterministic, free, offline."""
 
@@ -800,27 +857,82 @@ class LiveBackend:
         self.case_id = case_id
         self.tools = tool_descriptors
         self.system_prompt = system_prompt
+        # The API usage belongs to the response just produced.  The agent
+        # asks for it immediately after next_move() returns, so keep it on
+        # this backend instance rather than estimating it from the transcript.
+        self._last_usage = (0, 0)
 
     def next_move(self, transcript):
-        messages = [{"role": "system", "content": self.system_prompt}]
+        # The model must be told which queue item this run is handling.  The
+        # scripted backend gets that from SCRIPTS[case_id], but a live model
+        # only sees these messages.  Include it on every stateless request so
+        # later turns do not lose the original task after the transcript grows.
+        item = "referral" if config.PROBLEM == "B" else "claim"
+        messages = [
+            {"role": "system", "content": self.system_prompt},
+            {"role": "user", "content":
+             "Handle %s case %s. Start by retrieving this case with the "
+             "appropriate entry tool, then use the available tools and return "
+             "the required JSON response." % (item, self.case_id)},
+        ]
         for entry in transcript:
             messages.append({"role": entry["role"], "content": entry["content"]})
-        raw = _live_call(messages)
+        raw, self._last_usage = _live_call(messages)
         return _parse_move(raw)
 
-    @staticmethod
-    def token_estimate(transcript):
-        # Replace with the usage numbers the API returns. Estimating here
-        # and calling it measured is the mistake D6 punishes.
-        return 0, 0
+    def token_estimate(self, transcript):
+        # These are measured usage values from the API response, not an
+        # estimate.  Consume the value once so one API response is counted
+        # exactly once by the agent loop.
+        usage = self._last_usage
+        self._last_usage = (0, 0)
+        return usage
 
 
 def _parse_move(text):
     """The model must answer in JSON. Anything else is a run you cannot
     grade, so say so loudly rather than guessing."""
+    text = (text or "").strip()
     try:
-        return json.loads(text)
+        move = json.loads(text)
+        if not isinstance(move, dict):
+            raise ValueError("top-level JSON must be an object")
+
+        # The prompt asks for `calls`, but some OpenAI-compatible models use
+        # a single `action` object or name its fields `name`/`arguments`.
+        # Normalize those equivalent shapes at the boundary so the loop
+        # remains vendor-neutral and never crashes on a missing `tool` key.
+        if "final" not in move and not move.get("calls") and "tool" not in move:
+            action = move.get("action") or move.get("next_action")
+            if isinstance(action, dict):
+                tool = action.get("tool") or action.get("name")
+                args = action.get("args")
+                if args is None:
+                    args = action.get("arguments")
+                if tool:
+                    move["tool"], move["args"] = tool, (args or {})
+            elif isinstance(action, str):
+                move["tool"] = action
+                move["args"] = move.get("parameters") or move.get("arguments") or {}
+        return move
     except json.JSONDecodeError:
+        # Some OpenAI-compatible endpoints still wrap a JSON object in a
+        # markdown fence even when JSON mode is requested.  Accept only a
+        # complete object extracted from the response; never guess a tool
+        # call or silently repair malformed arguments.
+        if text.startswith("```") and text.endswith("```"):
+            lines = text.splitlines()
+            text = "\n".join(lines[1:-1]).strip()
+            try:
+                return json.loads(text)
+            except json.JSONDecodeError:
+                pass
+        start, end = text.find("{"), text.rfind("}")
+        if start >= 0 and end > start:
+            try:
+                return json.loads(text[start:end + 1])
+            except json.JSONDecodeError:
+                pass
         return {"final": {"decision": "escalate",
                           "reason": "model did not return parseable JSON"},
                 "thought": "unparseable: %s" % text[:200]}
@@ -842,6 +954,10 @@ def _live_call(messages):
         "model": config.MODEL,
         "messages": messages,
         "temperature": 0,
+        # The loop contract is machine-readable JSON, not conversational
+        # prose.  JSON mode prevents a compliant model from narrating instead
+        # of returning the next move.
+        "response_format": {"type": "json_object"},
     }).encode()
     req = urllib.request.Request(
         config.BASE_URL.rstrip("/") + "/chat/completions",
@@ -850,7 +966,11 @@ def _live_call(messages):
                  "Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=60) as r:
         payload = json.load(r)
-    return payload["choices"][0]["message"]["content"]
+    content = payload["choices"][0]["message"]["content"]
+    usage = payload.get("usage") or {}
+    prompt_tokens = int(usage.get("prompt_tokens", 0) or 0)
+    completion_tokens = int(usage.get("completion_tokens", 0) or 0)
+    return content, (prompt_tokens, completion_tokens)
 
 
 def make_backend(case_id, tool_descriptors=None, system_prompt=""):

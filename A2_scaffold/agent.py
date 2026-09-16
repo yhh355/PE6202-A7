@@ -102,7 +102,19 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
             # Only calls INDEPENDENT of each other belong in one turn.
             # A dependency chain cannot be shortened by running things at
             # once - that is why Problem B saves less than Problem A.
-            calls = move.get("calls") or [(move["tool"], move["args"])]
+            calls = move.get("calls")
+            if not calls:
+                # `_parse_move` normalizes common single-action variants, but
+                # an invalid response must still fail loudly rather than
+                # raising an opaque KeyError from move["tool"].
+                tool = move.get("tool")
+                args = move.get("args")
+                if not tool or not isinstance(args, dict):
+                    raise GuardrailStop(
+                        "invalid_action",
+                        "model response contained neither calls nor a valid "
+                        "tool/args action")
+                calls = [(tool, args)]
             observations = []
 
             for name, args in calls:

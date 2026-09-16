@@ -615,6 +615,19 @@ DESCRIPTORS = {
                    "fires. band 'routine' is the default when no trigger "
                    "phrase appears; that is normal, not a failure.",
     },
+#     "check_referral_criteria": 
+#     {
+#     "name": "check_referral_criteria",
+#     "purpose": "Check a referral against the requirements for its specialty.",
+#     "when": "Use after retrieving the referral and before making a decision.",
+#     "args": {
+#         "specialty": "str, the referral specialty",
+#         "referral_id": "str, the referral id",
+#     },
+#     "returns": "Criteria information about the referral, such as flags, tests, "
+#                "department suitability and urgency.",
+#     "failure": "Returns None if the referral or specialty cannot be found.",
+# },
     "book_slot": {
         "name": "book_slot",
         "purpose": "Commit the appointment. THE IRREVERSIBLE STEP.",
