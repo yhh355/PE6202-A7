@@ -1,0 +1,192 @@
+[
+  {
+    "patient_id": "P-1180",
+    "date_of_birth": "1968-03-14",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-1192",
+    "date_of_birth": "1955-11-02",
+    "existing_appointments": [
+      {
+        "specialty": "ORT",
+        "clinic": "ORT-C1",
+        "date": "2026-10-21"
+      }
+    ]
+  },
+  {
+    "patient_id": "P-1204",
+    "date_of_birth": "1981-07-25",
+    "existing_appointments": [
+      {
+        "specialty": "OPH",
+        "clinic": "OPH-C2",
+        "date": "2026-10-02"
+      }
+    ]
+  },
+  {
+    "patient_id": "P-1215",
+    "date_of_birth": "1974-01-09",
+    "existing_appointments": [
+      {
+        "specialty": "ORT",
+        "clinic": "ORT-C1",
+        "date": "2026-06-11"
+      }
+    ]
+  },
+  {
+    "patient_id": "P-1227",
+    "date_of_birth": "1992-09-30",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-1233",
+    "date_of_birth": "1949-05-18",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-1241",
+    "date_of_birth": "2001-12-06",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2001",
+    "date_of_birth": "1970-02-11",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2002",
+    "date_of_birth": "1958-06-21",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2003",
+    "date_of_birth": "1988-04-05",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2004",
+    "date_of_birth": "1995-09-17",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2005",
+    "date_of_birth": "1962-12-02",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2006",
+    "date_of_birth": "1977-03-08",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2007",
+    "date_of_birth": "1948-11-30",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2008",
+    "date_of_birth": "1969-01-19",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2009",
+    "date_of_birth": "1982-07-07",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2010",
+    "date_of_birth": "1990-10-12",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2011",
+    "date_of_birth": "1954-05-14",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2012",
+    "date_of_birth": "1965-08-23",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2013",
+    "date_of_birth": "1986-02-26",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2014",
+    "date_of_birth": "1951-04-18",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2015",
+    "date_of_birth": "1973-09-09",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2016",
+    "date_of_birth": "1993-12-27",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2017",
+    "date_of_birth": "1980-06-06",
+    "existing_appointments": [
+      {
+        "specialty": "OPH",
+        "clinic": "OPH-C2",
+        "date": "2026-10-20"
+      }
+    ]
+  },
+  {
+    "patient_id": "P-2018",
+    "date_of_birth": "1971-03-29",
+    "existing_appointments": [
+      {
+        "specialty": "ENT",
+        "clinic": "ENT-C1",
+        "date": "2026-10-21"
+      }
+    ]
+  },
+  {
+    "patient_id": "P-2019",
+    "date_of_birth": "1966-01-03",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2020",
+    "date_of_birth": "1979-05-25",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2021",
+    "date_of_birth": "1959-11-11",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2022",
+    "date_of_birth": "1991-02-16",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2023",
+    "date_of_birth": "1984-07-31",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2024",
+    "date_of_birth": "1960-09-20",
+    "existing_appointments": []
+  },
+  {
+    "patient_id": "P-2025",
+    "date_of_birth": "1998-06-14",
+    "existing_appointments": []
+  }
+]
