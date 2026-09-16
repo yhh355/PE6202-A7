@@ -24,7 +24,7 @@ import os
 # ─────────────────────────────────────────────────────────────────────
 # THE THREE STRINGS. Change these, change nothing else.
 # ─────────────────────────────────────────────────────────────────────
-BACKEND = "scripted"          # "scripted" | "live"
+BACKEND = "live"      # "scripted" | "live"
 
 MODEL = "openai/gpt-4o-mini"  # only used when BACKEND == "live"
 BASE_URL = "https://openrouter.ai/api/v1"
@@ -32,7 +32,7 @@ BASE_URL = "https://openrouter.ai/api/v1"
 # Your key never goes in this file. Put it in the environment:
 #     export OPENROUTER_API_KEY="sk-or-..."
 # In Colab:  os.environ["OPENROUTER_API_KEY"] = "sk-or-..."
-API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+API_KEY = os.environ.get("OPENROUTER_API_KEY","")
 
 # ─────────────────────────────────────────────────────────────────────
 # WHICH PROBLEM. "A" = claims first response, "B" = referral coordination.

@@ -158,5 +158,45 @@
     "patient_id": "P-2025",
     "method": "email",
     "value": "p2025@example.test"
+  },
+  {
+    "patient_id": "P-2026",
+    "method": "sms",
+    "value": "+65 9000 2026"
+  },
+  {
+    "patient_id": "P-2027",
+    "method": "phone",
+    "value": "+65 6000 2027"
+  },
+  {
+    "patient_id": "P-2028",
+    "method": "email",
+    "value": "p2028@example.test"
+  },
+  {
+    "patient_id": "P-2029",
+    "method": "sms",
+    "value": "+65 9000 2029"
+  },
+  {
+    "patient_id": "P-2030",
+    "method": "phone",
+    "value": "+65 6000 2030"
+  },
+  {
+    "patient_id": "P-2031",
+    "method": "email",
+    "value": "p2031@example.test"
+  },
+  {
+    "patient_id": "P-2032",
+    "method": "sms",
+    "value": "+65 9000 2032"
+  },
+  {
+    "patient_id": "P-2033",
+    "method": "phone",
+    "value": "+65 6000 2033"
   }
 ]

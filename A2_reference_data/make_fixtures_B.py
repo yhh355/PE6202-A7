@@ -531,6 +531,70 @@ EXTRA_CONTACTS = [
     {"patient_id": "P-2025", "method": "email", "value": "p2025@example.test"},
 ]
 
+# Eight additional positive cases keep the submitted queue within the brief's
+# 30–50-case range without adding more live-model negative runs.
+NEW_PATIENTS = [
+    {"patient_id": "P-2026", "date_of_birth": "1972-01-15", "existing_appointments": []},
+    {"patient_id": "P-2027", "date_of_birth": "1981-03-22", "existing_appointments": []},
+    {"patient_id": "P-2028", "date_of_birth": "1990-05-09", "existing_appointments": []},
+    {"patient_id": "P-2029", "date_of_birth": "1967-07-18", "existing_appointments": []},
+    {"patient_id": "P-2030", "date_of_birth": "1975-11-02", "existing_appointments": []},
+    {"patient_id": "P-2031", "date_of_birth": "1989-02-27", "existing_appointments": []},
+    {"patient_id": "P-2032", "date_of_birth": "1963-06-30", "existing_appointments": []},
+    {"patient_id": "P-2033", "date_of_birth": "1994-10-11", "existing_appointments": []},
+]
+
+NEW_CONTACTS = [
+    {"patient_id": "P-2026", "method": "sms", "value": "+65 9000 2026"},
+    {"patient_id": "P-2027", "method": "phone", "value": "+65 6000 2027"},
+    {"patient_id": "P-2028", "method": "email", "value": "p2028@example.test"},
+    {"patient_id": "P-2029", "method": "sms", "value": "+65 9000 2029"},
+    {"patient_id": "P-2030", "method": "phone", "value": "+65 6000 2030"},
+    {"patient_id": "P-2031", "method": "email", "value": "p2031@example.test"},
+    {"patient_id": "P-2032", "method": "sms", "value": "+65 9000 2032"},
+    {"patient_id": "P-2033", "method": "phone", "value": "+65 6000 2033"},
+]
+
+NEW_POSITIVE_REFERRALS = [
+    {"referral_id": "REF-6030", "patient_id": "P-2026", "referring_clinic": "Hougang Family Clinic",
+     "specialty": "OPH", "date_received": "2026-09-09",
+     "clinical_summary": "Gradual blurred vision and glare at night, query cataract.",
+     "tests_attached": ["VF-01"], "tests_attached_on": "2026-09-04"},
+    {"referral_id": "REF-6031", "patient_id": "P-2027", "referring_clinic": "Queenstown Medical",
+     "specialty": "CARD", "date_received": "2026-09-09",
+     "clinical_summary": "Stable cardiac symptoms for several months, review requested.",
+     "tests_attached": ["ECG-12", "BNP-01"], "tests_attached_on": "2026-09-08"},
+    {"referral_id": "REF-6032", "patient_id": "P-2028", "referring_clinic": "Toa Payoh Clinic",
+     "specialty": "ORT", "date_received": "2026-09-09",
+     "clinical_summary": "Persistent knee pain after a sports injury.",
+     "tests_attached": ["XR-KNEE"], "tests_attached_on": "2026-09-05"},
+    {"referral_id": "REF-6033", "patient_id": "P-2029", "referring_clinic": "Marine Parade GP",
+     "specialty": "DER", "date_received": "2026-09-09",
+     "clinical_summary": "Stable eczema rash on hands for review.",
+     "tests_attached": []},
+    {"referral_id": "REF-6034", "patient_id": "P-2030", "referring_clinic": "Jurong Family Clinic",
+     "specialty": "ENT", "date_received": "2026-09-09",
+     "clinical_summary": "Stable sinus blockage and throat discomfort.",
+     "tests_attached": ["AUD-01", "NASO-02"], "tests_attached_on": "2026-09-03"},
+    {"referral_id": "REF-6035", "patient_id": "P-2031", "referring_clinic": "Ang Mo Kio Clinic",
+     "specialty": "NEU", "date_received": "2026-09-09",
+     "clinical_summary": "Chronic headache and migraine symptoms for one year.",
+     "tests_attached": ["CT-HEAD"], "tests_attached_on": "2026-09-02"},
+    {"referral_id": "REF-6036", "patient_id": "P-2032", "referring_clinic": "Clementi Medical",
+     "specialty": "OPH", "date_received": "2026-09-09",
+     "clinical_summary": "Routine review for gradual visual blur.",
+     "tests_attached": ["VF-01"], "tests_attached_on": "2026-09-04"},
+    {"referral_id": "REF-6037", "patient_id": "P-2033", "referring_clinic": "Bedok Family Practice",
+     "specialty": "CARD", "date_received": "2026-09-09",
+     "clinical_summary": "Cardiac palpitations progressive over weeks.",
+     "tests_attached": ["ECG-12", "BNP-01"], "tests_attached_on": "2026-09-06"},
+]
+
+KEPT_EXTRA_REFERRAL_IDS = {
+    "REF-6001", "REF-6002", "REF-6003", "REF-6004", "REF-6005",
+    "REF-6022", "REF-6025",
+}
+
 EXTRA_REFERRALS = [
     {"referral_id": "REF-6001", "patient_id": "P-2001", "referring_clinic": "Hougang Family Clinic",
      "specialty": "OPH", "date_received": "2026-09-09",
@@ -664,9 +728,12 @@ def write():
         "specialties": SPECIALTIES + EXTRA_SPECIALTIES,
         "urgency_bands": URGENCY_BANDS,          # protocol - not extensible
         "clinic_slots": CLINIC_SLOTS + EXTRA_CLINIC_SLOTS,
-        "patients": PATIENTS + EXTRA_PATIENTS,
-        "contacts": CONTACTS + EXTRA_CONTACTS,
-        "referrals": REFERRALS + EXTRA_REFERRALS,
+        "patients": PATIENTS + EXTRA_PATIENTS + NEW_PATIENTS,
+        "contacts": CONTACTS + EXTRA_CONTACTS + NEW_CONTACTS,
+        "referrals": (REFERRALS
+                      + [r for r in EXTRA_REFERRALS
+                         if r["referral_id"] in KEPT_EXTRA_REFERRAL_IDS]
+                      + NEW_POSITIVE_REFERRALS),
     }
     for name, rows in tables.items():
         path = os.path.join(OUT, name + ".json")
