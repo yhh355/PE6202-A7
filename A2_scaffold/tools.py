@@ -187,6 +187,8 @@ def check_referral_criteria(specialty, referral_id):
     cases will attack exactly this, and improving it is fair game - just
     do not change the PROTOCOL, only how you detect it.
     """
+    if not isinstance(specialty, str) or not specialty.strip() or not isinstance(referral_id, str) or not referral_id.strip():
+        raise ValueError('specialty and referral_id must be nonempty strings')
     ref = get_referral(referral_id)
     spec = next((s for s in _load("B", "specialties")
                  if s["code"] == specialty), None)
@@ -246,8 +248,16 @@ def get_clinic_slots(specialty, band, **window):
     it is a Python keyword and cannot be a normal parameter. That is a
     small ugliness bought deliberately, to keep the domain word.
     """
-    lo = window.get("from", "0000-00-00")
-    hi = window.get("to", "9999-99-99")
+    from datetime import date
+    if band not in ('urgent', 'soon', 'routine'):
+        raise ValueError('band must be urgent, soon or routine')
+    if set(window) != {'from', 'to'}:
+        raise ValueError('exactly from and to dates are required')
+    lo, hi = window['from'], window['to']
+    if not isinstance(lo, str) or not isinstance(hi, str):
+        raise ValueError('dates must be YYYY-MM-DD strings')
+    if date.fromisoformat(lo).isoformat() != lo or date.fromisoformat(hi).isoformat() != hi or lo > hi:
+        raise ValueError('invalid or reversed date window')
     return [s for s in _load("B", "clinic_slots")
             if s["specialty"] == specialty
             and s["band"] == band
@@ -798,6 +808,8 @@ def call(problem, name, args):
                    nothing about the output says anything went wrong.
     """
     table = REGISTRY[problem]
+    if problem == 'B' and any(not isinstance(v, str) or not v.strip() for v in args.values()):
+        raise ValueError('tool arguments must be nonempty strings')
     if name not in table:
         raise KeyError(
             "No tool named %r for Problem %s. Available: %s"

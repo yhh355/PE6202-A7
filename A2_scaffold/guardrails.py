@@ -33,6 +33,10 @@ class Guardrails:
     instance leaks state and D4 requires every case to start clean."""
 
     def __init__(self, max_turns, max_tokens, autonomy):
+        if autonomy not in ('suggest', 'confirm', 'act'):
+            raise ValueError('invalid autonomy setting')
+        if max_turns < 1 or max_tokens < 1:
+            raise ValueError('guardrail limits must be positive')
         self.max_turns = max_turns
         self.max_tokens = max_tokens
         self.autonomy = autonomy
@@ -63,7 +67,8 @@ class Guardrails:
         guard deleted: 8 turns, no answer, 1.6x the cost, and NO
         exception raised. It did not crash. It burned money in a circle.
         """
-        signature = (tool, repr(sorted(args.items())))
+        import json
+        signature = (tool, json.dumps(args, sort_keys=True, separators=(',', ':')))
         if signature in self.seen_actions:
             self._fire("duplicate_action", "%s repeated" % tool)
             raise GuardrailStop("duplicate_action",

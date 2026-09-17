@@ -91,6 +91,19 @@ def code_check(record, expected):
                          % (record.get("trigger"), expected["trigger"]))
 
     # A booking must book the RIGHT slot. Problem B only.
+    if expected.get('missing'):
+        import re
+        code = expected['missing'].split()[-1]
+        reported = record.get('missing')
+        values = reported if isinstance(reported, list) else [reported]
+        identifiers = {part for value in values if isinstance(value, str)
+                       for part in re.findall(r'[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*', value)}
+        if code not in identifiers:
+            fails.append('missing test code %s not recorded in missing field' % code)
+    if 'actions' in record:
+        wanted = 1 if expected.get('expected_decision') == 'book' else 0
+        if len(record['actions']) != wanted:
+            fails.append('executed bookings %d, expected %d' % (len(record['actions']),wanted))
     if expected.get("booked"):
         got = record.get("booked") or {}
         for field in ("clinic", "date", "time"):

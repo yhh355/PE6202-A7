@@ -24,15 +24,21 @@ You cannot report a failure you had no way of noticing.
 ====================================================================
 """
 import time
+import json
+import uuid
+from pathlib import Path
 
 import config
 import prompt
 import tools
 from backends import make_backend
 from guardrails import Guardrails, GuardrailStop
+from booking_safety import BookingSafety
+from d2b_contracts import observation, descriptors
 
 
-def run_case(case_id, problem=None, approve=None, verbose=False):
+def run_case(case_id, problem=None, approve=None, verbose=False, *, version='v2',
+             backend_override=None, log_path=None):
     """Run ONE case from a clean state and return the decision record.
 
     ISOLATION (D4): everything this function needs is created inside it.
@@ -49,14 +55,19 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
     # backend this IS the experiment D2(b) measures: the descriptors and
     # the routing rules, assembled by prompt.build_system_prompt().
     #     python3 run_eval.py --prompt      to see the exact text
-    backend = make_backend(
+    contracts = descriptors(tools.DESCRIPTORS, version) if problem == 'B' else tools.DESCRIPTORS
+    backend = backend_override or make_backend(
         case_id,
-        tool_descriptors=[tools.DESCRIPTORS[n] for n in tools.REGISTRY[problem]
+        tool_descriptors=[contracts[n] for n in tools.REGISTRY[problem]
                           if n in tools.DESCRIPTORS],
-        system_prompt=prompt.build_system_prompt(problem))
+        system_prompt=prompt.build_system_prompt(problem, version))
 
     transcript = []      # what the model would see
     evidence = []        # every tool actually called, in order
+    trace = []
+    usage_records = []
+    safety = BookingSafety(case_id, guards, log_path or
+        Path(__file__).parent / '.a2_runs' / uuid.uuid4().hex / 'decisions.jsonl') if problem == 'B' else None
 
     # TURNS ARE TOOL-CALLING TURNS. The concluding move - where the agent
     # writes its decision record - is bookkeeping, not a turn. This is the
@@ -72,7 +83,7 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
     # On the scripted backend the gate auto-approves so the run stays
     # deterministic. The RECORD still shows the gate was reached and
     # passed, which is what a marker looks for.
-    if approve is None:
+    if approve is None and backend.name == 'scripted':
         approve = lambda action, payload: True
 
     try:
@@ -80,11 +91,19 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
             iterations += 1
             if iterations > config.MAX_TURNS + 2:
                 raise GuardrailStop("step_cap", "loop did not terminate")
+            # Reserve the last available response for a conclusion. Any extra
+            # requested tools are refused below before they execute.
+            if tokens_in + tokens_out >= config.MAX_TOKENS_PER_RUN:
+                raise GuardrailStop('budget_ceiling', 'no budget remains for another model request')
 
             move = backend.next_move(transcript)
             ti, to = backend.token_estimate(transcript)
             tokens_in, tokens_out = tokens_in + ti, tokens_out + to
+            usage_records.append({'input_tokens': ti, 'output_tokens': to,
+                                  'source': 'api_usage' if backend.name == 'live' else 'scripted_estimate'})
             guards.check_budget(tokens_in + tokens_out)
+            if not isinstance(move, dict):
+                raise ValueError('model move must be an object')
 
             if verbose:
                 label = ("conclude" if "final" in move else "turn %d" % (turns + 1))
@@ -92,7 +111,12 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
 
             # ---- conclude -------------------------------------------
             if "final" in move:
+                if not isinstance(move['final'], dict) or move['final'].get('decision') not in (
+                        'book', 'request_information', 'escalate', 'approve_in_principle', 'request_document'):
+                    raise ValueError('invalid final decision')
                 record = dict(move["final"])
+                if safety:
+                    safety.validate_final(record)
                 break
 
             # ---- act: one turn may carry SEVERAL calls ---------------
@@ -102,26 +126,20 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
             # Only calls INDEPENDENT of each other belong in one turn.
             # A dependency chain cannot be shortened by running things at
             # once - that is why Problem B saves less than Problem A.
-            calls = move.get("calls")
-            if not calls:
-                # `_parse_move` normalizes common single-action variants, but
-                # an invalid response must still fail loudly rather than
-                # raising an opaque KeyError from move["tool"].
-                tool = move.get("tool")
-                args = move.get("args")
-                if not tool or not isinstance(args, dict):
-                    raise GuardrailStop(
-                        "invalid_action",
-                        "model response contained neither calls nor a valid "
-                        "tool/args action")
-                calls = [(tool, args)]
+            calls = move.get("calls") or [(move["tool"], move["args"])]
+            if not isinstance(calls, list) or not calls or len(calls) > 16:
+                raise ValueError('calls must be a nonempty list of at most 16 tool calls')
             observations = []
 
             for name, args in calls:
+                if not isinstance(name, str) or not isinstance(args, dict):
+                    raise ValueError('each call needs a tool name and argument object')
                 guards.check_duplicate(name, args)
 
                 # THE GATE goes in front of the irreversible step only.
                 if name == tools.GATED_ACTION.get(problem):
+                    if safety:
+                        safety.validate(args, trace)
                     if not guards.gate(name, args, approve):
                         raise GuardrailStop(
                             "gate_held",    
@@ -129,16 +147,22 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
                             % (name, config.AUTONOMY))
 
                 result = tools.call(problem, name, args)
+                if problem == 'B':
+                    result = observation(name, result, version)
+                if safety and name == 'book_slot':
+                    safety.record(args, trace, config.AUTONOMY, turns)
                 evidence.append(name)
                 observations.append({"tool": name, "args": args,
                                      "observation": result})
                 if verbose:
                     print("       %-26s -> %s" % (name, _short(result)))
 
+            # Full action arguments must be visible on the next model turn.
+            trace.extend(observations)
             transcript.append({"role": "assistant",
-                               "content": move.get("thought", "")})
+                               "content": json.dumps(move, ensure_ascii=False)})
             transcript.append({"role": "user",
-                               "content": repr(observations)})
+                               "content": json.dumps({'tool_observations': observations}, ensure_ascii=False)})
 
     except GuardrailStop as stop:
         # A LOUD STOP. The record says what halted the run and where, so
@@ -147,6 +171,10 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
         record = {"decision": "escalate",
                   "reason": "halted by the %s guardrail - %s"
                             % (stop.reason, stop.detail)}
+    except (ValueError, KeyError, TypeError) as error:
+        stopped_by = 'invalid_tool_or_output'
+        guards._fire(stopped_by, str(error))
+        record = {'decision': 'escalate', 'reason': str(error)}
 
     cost = (tokens_in / 1e6) * config.PRICE_IN + (tokens_out / 1e6) * config.PRICE_OUT
 
@@ -161,6 +189,13 @@ def run_case(case_id, problem=None, approve=None, verbose=False):
         "guardrails_fired": guards.fired,
         "stopped_by": stopped_by,
         "backend": backend.name,
+        "prompt_version": version,
+        "autonomy": config.AUTONOMY,
+        "trace": trace,
+        "usage_records": usage_records,
+        "measurement_kind": 'api_usage' if backend.name == 'live' else 'scripted_estimate',
+        "actions": safety.actions if safety else [],
+        "action_log": str(safety.log_path) if safety and safety.actions else None,
     })
     return record
 

@@ -950,10 +950,14 @@ def _live_call(messages):
             "\n  BACKEND is 'live' but OPENROUTER_API_KEY is not set.\n"
             "    export OPENROUTER_API_KEY='sk-or-...'\n"
             "  Or set BACKEND = 'scripted' in config.py, which is free.\n")
+    budget = getattr(config, 'LIVE_BUDGET', None)
+    if budget:
+        budget.before(messages, 1024)
     body = json.dumps({
         "model": config.MODEL,
         "messages": messages,
         "temperature": 0,
+        "max_tokens": 1024,
         # The loop contract is machine-readable JSON, not conversational
         # prose.  JSON mode prevents a compliant model from narrating instead
         # of returning the next move.
@@ -968,8 +972,12 @@ def _live_call(messages):
         payload = json.load(r)
     content = payload["choices"][0]["message"]["content"]
     usage = payload.get("usage") or {}
-    prompt_tokens = int(usage.get("prompt_tokens", 0) or 0)
-    completion_tokens = int(usage.get("completion_tokens", 0) or 0)
+    prompt_tokens = usage.get("prompt_tokens")
+    completion_tokens = usage.get("completion_tokens")
+    if any(type(v) is not int or v < 0 for v in (prompt_tokens, completion_tokens)):
+        raise RuntimeError('API usage missing/invalid; billed request may have occurred. Do not report zero tokens.')
+    if budget:
+        budget.record(payload, usage)
     return content, (prompt_tokens, completion_tokens)
 
 
