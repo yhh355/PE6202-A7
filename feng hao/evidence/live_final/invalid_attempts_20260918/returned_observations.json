@@ -1,0 +1,102 @@
+[
+  {
+    "case_id": "REF-5590",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": \"sudden visual loss\", \"right_department\": true, \"missing_tests\": []}"
+  },
+  {
+    "case_id": "REF-5590",
+    "trial": 2,
+    "returned_json": "{\"red_flag_term\": \"sudden visual loss\", \"right_department\": true, \"missing_tests\": []}"
+  },
+  {
+    "case_id": "REF-5590",
+    "trial": 3,
+    "returned_json": "{\"red_flag_term\": \"sudden visual loss\", \"right_department\": true, \"missing_tests\": []}"
+  },
+  {
+    "case_id": "REF-5602",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [], \"band\": \"routine\", \"window_weeks\": 8}"
+  },
+  {
+    "case_id": "REF-5614",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"VF-01\", \"name\": \"visual field test\"}]}"
+  },
+  {
+    "case_id": "REF-5614",
+    "trial": 2,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"VF-01\", \"name\": \"visual field test\"}]}"
+  },
+  {
+    "case_id": "REF-5614",
+    "trial": 3,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"VF-01\", \"name\": \"visual field test\"}]}"
+  },
+  {
+    "case_id": "REF-5620",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [], \"band\": \"routine\", \"window_weeks\": 8}"
+  },
+  {
+    "case_id": "REF-5631",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [], \"band\": \"urgent\", \"window_weeks\": 2}"
+  },
+  {
+    "case_id": "REF-5645",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [], \"band\": \"routine\", \"window_weeks\": 8}"
+  },
+  {
+    "case_id": "REF-5658",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"BNP-01\", \"name\": \"serum BNP\"}]}"
+  },
+  {
+    "case_id": "REF-5658",
+    "trial": 2,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"BNP-01\", \"name\": \"serum BNP\"}]}"
+  },
+  {
+    "case_id": "REF-5658",
+    "trial": 3,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"BNP-01\", \"name\": \"serum BNP\"}]}"
+  },
+  {
+    "case_id": "REF-5663",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"XR-KNEE\", \"name\": \"weight-bearing knee X-ray\"}]}"
+  },
+  {
+    "case_id": "REF-5663",
+    "trial": 2,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"XR-KNEE\", \"name\": \"weight-bearing knee X-ray\"}]}"
+  },
+  {
+    "case_id": "REF-5663",
+    "trial": 3,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [{\"code\": \"XR-KNEE\", \"name\": \"weight-bearing knee X-ray\"}]}"
+  },
+  {
+    "case_id": "REF-5671",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": false, \"missing_tests\": [{\"code\": \"VF-01\", \"name\": \"visual field test\"}]}"
+  },
+  {
+    "case_id": "REF-5671",
+    "trial": 2,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": false, \"missing_tests\": [{\"code\": \"VF-01\", \"name\": \"visual field test\"}]}"
+  },
+  {
+    "case_id": "REF-5671",
+    "trial": 3,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": false, \"missing_tests\": [{\"code\": \"VF-01\", \"name\": \"visual field test\"}]}"
+  },
+  {
+    "case_id": "REF-5684",
+    "trial": 1,
+    "returned_json": "{\"red_flag_term\": null, \"right_department\": true, \"missing_tests\": [], \"band\": \"routine\", \"window_weeks\": 8}"
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "v1": {
+    "trials": 50,
+    "code_passed": 10,
+    "code_pass_rate": 0.2,
+    "median_turns": 3.5,
+    "tokens_in": 490509,
+    "tokens_out": 14351,
+    "cost_usd": 0.082185,
+    "measurement_kind": "api_usage",
+    "judgement_status": "pending; code pass is not overall pass",
+    "criteria_calls": 49
+  },
+  "v2": {
+    "trials": 50,
+    "code_passed": 4,
+    "code_pass_rate": 0.08,
+    "median_turns": 5.0,
+    "tokens_in": 508115,
+    "tokens_out": 14601,
+    "cost_usd": 0.084975,
+    "measurement_kind": "api_usage",
+    "judgement_status": "pending; code pass is not overall pass",
+    "criteria_calls": 49
+  },
+  "comparison_status": "incomplete: 30 local transport failures archived, not model outcomes"
+}
