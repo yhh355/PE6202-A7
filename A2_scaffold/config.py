@@ -24,9 +24,9 @@ import os
 # ─────────────────────────────────────────────────────────────────────
 # THE THREE STRINGS. Change these, change nothing else.
 # ─────────────────────────────────────────────────────────────────────
-BACKEND = "live"      # "scripted" | "live"
+BACKEND = "scripted"      # "scripted" | "live"
 
-MODEL = "openai/gpt-4o-mini"  # only used when BACKEND == "live" #We used google/gemini-2.5-flash as the midtier model for calculations#
+MODEL = "z-ai/glm-4.5-air"  # only used when BACKEND == "live" #We used google/gemini-2.5-flash as the midtier model for calculations#
 BASE_URL = "https://openrouter.ai/api/v1"
 
 # Your key never goes in this file. Put it in the environment:
