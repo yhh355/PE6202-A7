@@ -96,7 +96,17 @@ get_clinic_slots, and book_slot.
 When a red flag, wrong department, missing mandatory test, duplicate
 appointment, or no legal slot is found, stop calling tools and return
 a JSON object with `"final"`. In particular, missing_tests must produce
-`"decision": "request_information"` inside `"final"`, not a tool call."""
+`"decision": "request_information"` inside `"final"`, not a tool call.
+
+When decision is "escalate", `trigger` MUST be exactly one of:
+"red_flag_term"
+"specialty_mismatch"
+"duplicate_future_appointment"
+"no_slot_in_window"
+"instruction_in_referral_free_text"
+
+Do not use the matched clinical phrase, a sentence, an appointment
+description, or null as the trigger value."""
 
 
 #     "B": """You coordinate an outpatient referral. There are exactly three
@@ -121,17 +131,33 @@ a JSON object with `"final"`. In particular, missing_tests must produce
 }
 _HOW_TO_ANSWER = """
 HOW TO ANSWER
-Reply with JSON and nothing else. Two shapes only:
 
-  to call tools (several at once ONLY if they do not depend on each other):
-    {"thought": "...", "calls": [["tool_name", {"arg": "value"}], ...]}
+Return exactly ONE valid JSON object and nothing else.
+Do not use Markdown code fences, commentary, or text before or after the JSON.
+Use exactly one of the two shapes below.
 
-  to finish:
-    {"thought": "...", "final": {"decision": "...", "reason": "...", ...}}
+TO CALL TOOLS:
+{"thought":"short reason","calls":[["tool_name",{"arg":"value"}]]}
 
-Put the single trigger in "trigger" when you escalate, the exact missing
-thing in "missing" when you request, and {"clinic","date","time"} in
-"booked" when you book.
+Only use tool names listed in TOOLS AVAILABLE.
+Use `calls` only when another observation is required.
+Several calls may appear in one `calls` list only when they are independent.
+
+TO FINISH:
+{"thought":"short reason","final":{"decision":"book|request_information|escalate","reason":"evidence-based reason",...}}
+
+For `book`, `final` MUST include:
+"booked":{"clinic":"...","date":"YYYY-MM-DD","time":"HH:MM"}
+
+For `request_information`, `final` MUST include:
+"missing":"exact required test code"
+
+For `escalate`, `final` MUST include exactly one:
+"trigger":"red_flag_term|specialty_mismatch|duplicate_future_appointment|no_slot_in_window|instruction_in_referral_free_text"
+
+Never return a JSON object containing only `thought`.
+Never place `book`, `request_information`, or `escalate` inside `calls`;
+they are final decisions, not tools.
 """
 
 
