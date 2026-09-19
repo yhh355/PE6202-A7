@@ -1,0 +1,66 @@
+{
+  "mode": "sequential",
+  "case": "REF-5602",
+  "summary": {
+    "trials": 1,
+    "passed": 1,
+    "pass_rate": 1.0,
+    "median_turns": 6,
+    "cost_usd": 0.004116
+  },
+  "results": [
+    {
+      "case_id": "REF-5602",
+      "trial": 1,
+      "passed": true,
+      "fails": [],
+      "record": {
+        "decision": "book",
+        "booked": {
+          "clinic": "OPH-C2",
+          "date": "2026-10-14",
+          "time": "11:20"
+        },
+        "reason": "Urgency band routine, VF-01 present, and no existing OPH appointment. OPH-C2 was first available on 2026-10-14 inside the eight-week window.",
+        "case_id": "REF-5602",
+        "evidence": [
+          "get_referral",
+          "check_referral_criteria",
+          "lookup_patient",
+          "get_clinic_slots",
+          "get_clinic_slots",
+          "book_slot"
+        ],
+        "turns": 6,
+        "tokens_in": 37800,
+        "tokens_out": 840,
+        "cost_usd": 0.004116,
+        "seconds": 0.004,
+        "guardrails_fired": [
+          {
+            "guardrail": "gate_passed",
+            "detail": "book_slot (autonomy=confirm)"
+          }
+        ],
+        "stopped_by": null,
+        "backend": "scripted"
+      },
+      "family": "routine_booking_multi_query"
+    }
+  ],
+  "judgement_queue": [
+    {
+      "case_id": "REF-5602",
+      "decision": "book",
+      "reason": "Urgency band routine, VF-01 present, and no existing OPH appointment. OPH-C2 was first available on 2026-10-14 inside the eight-week window.",
+      "must_record": [
+        "urgency band routine and the 8-week window",
+        "booked at 5 weeks",
+        "VF-01 present",
+        "no existing OPH appointment for P-1180"
+      ],
+      "verdict": null,
+      "graded_by": null
+    }
+  ]
+}

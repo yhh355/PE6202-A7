@@ -11,7 +11,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                "REF-5602"
+                "REF-5703"
             ]
         }
     ]

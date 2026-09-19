@@ -615,18 +615,32 @@ DESCRIPTORS = {
                    "fires. band 'routine' is the default when no trigger "
                    "phrase appears; that is normal, not a failure.",
     },
-#     "check_referral_criteria": 
-#     {
+# "check_referral_criteria": {
 #     "name": "check_referral_criteria",
-#     "purpose": "Check a referral against the requirements for its specialty.",
-#     "when": "Use after retrieving the referral and before making a decision.",
+#     "purpose": (
+#         "Check the referral for red flags, department match, mandatory "
+#         "tests, urgency band, and booking window."
+#     ),
+#     "when": (
+#         "Run immediately after get_referral. Its result determines whether "
+#         "the run should stop or continue to slot search."
+#     ),
 #     "args": {
-#         "specialty": "str, the referral specialty",
-#         "referral_id": "str, the referral id",
+#         "specialty": "str, the specialty code from the referral",
+#         "referral_id": "str, the referral ID"
 #     },
-#     "returns": "Criteria information about the referral, such as flags, tests, "
-#                "department suitability and urgency.",
-#     "failure": "Returns None if the referral or specialty cannot be found.",
+#     "returns": (
+#         "{red_flag_term: str or None, right_department: bool, "
+#         "missing_tests: list, band: urgent|soon|routine, "
+#         "window_weeks: 2|4|8}"
+#     ),
+#     "failure": (
+#         "Returns None only when the referral or specialty does not exist. "
+#         "Apply results in this order: red flag -> escalate; wrong department "
+#         "-> escalate; missing_tests not empty -> request_information; "
+#         "otherwise continue to duplicate and slot checks. An empty "
+#         "missing_tests list means all mandatory tests are present."
+#     )
 # },
     "book_slot": {
         "name": "book_slot",

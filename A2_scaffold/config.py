@@ -24,15 +24,15 @@ import os
 # ─────────────────────────────────────────────────────────────────────
 # THE THREE STRINGS. Change these, change nothing else.
 # ─────────────────────────────────────────────────────────────────────
-BACKEND = "scripted"      # "scripted" | "live"
+BACKEND = "scripted"  # "scripted" | "live"
 
-MODEL = "z-ai/glm-4.5-air"  # only used when BACKEND == "live" #We used google/gemini-2.5-flash as the midtier model for calculations#
+MODEL = "openai/gpt-4o-mini" #openai/gpt-4o-mini"  # only used when BACKEND == "live"
 BASE_URL = "https://openrouter.ai/api/v1"
 
 # Your key never goes in this file. Put it in the environment:
 #     export OPENROUTER_API_KEY="sk-or-..."
 # In Colab:  os.environ["OPENROUTER_API_KEY"] = "sk-or-..."
-API_KEY = os.environ.get("OPENROUTER_API_KEY","")
+API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 # ─────────────────────────────────────────────────────────────────────
 # WHICH PROBLEM. "A" = claims first response, "B" = referral coordination.
@@ -94,8 +94,8 @@ def data_root():
 # Checked against vendor pages 28 August 2026. RE-CHECK THEM: quoting a
 # price you did not verify is the kind of thing D6 is marked on.
 # ─────────────────────────────────────────────────────────────────────
-PRICE_IN = 0.10
-PRICE_OUT = 0.40
+PRICE_IN = 0.15
+PRICE_OUT = 0.60
 
 
 def _stale_bytecode_warning():

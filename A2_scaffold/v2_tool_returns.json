@@ -1,0 +1,1493 @@
+{
+  "config": "BACKEND=live  LIVE - this costs money  |  PROBLEM=B  |  model=openai/gpt-4o-mini  |  cap=8 turns  |  autonomy=confirm",
+  "target_tool": "check_referral_criteria",
+  "measurement_method": "estimate:characters/4",
+  "cases_requested": [
+    "REF-5590",
+    "REF-5602",
+    "REF-5614",
+    "REF-5620",
+    "REF-5631",
+    "REF-5645",
+    "REF-5658",
+    "REF-5663",
+    "REF-5671",
+    "REF-5684",
+    "REF-5697",
+    "REF-5703",
+    "REF-5711",
+    "REF-5725",
+    "REF-5738",
+    "REF-6001",
+    "REF-6002",
+    "REF-6003",
+    "REF-6004",
+    "REF-6005",
+    "REF-6022",
+    "REF-6025",
+    "REF-6030",
+    "REF-6031",
+    "REF-6032",
+    "REF-6033",
+    "REF-6034",
+    "REF-6035",
+    "REF-6036",
+    "REF-6037"
+  ],
+  "trial_count": 50,
+  "target_tool_calls": 50,
+  "target_tool_return_tokens_total": 1401,
+  "target_tool_return_tokens_average": 28.02,
+  "all_tool_calls": [
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5590"
+      },
+      "return_tokens": 81,
+      "return_characters": 323
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5590"
+      },
+      "return_tokens": 29,
+      "return_characters": 115
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5590"
+      },
+      "return_tokens": 81,
+      "return_characters": 323
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5590"
+      },
+      "return_tokens": 29,
+      "return_characters": 115
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5590"
+      },
+      "return_tokens": 81,
+      "return_characters": 323
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5590"
+      },
+      "return_tokens": 29,
+      "return_characters": 115
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5602"
+      },
+      "return_tokens": 84,
+      "return_characters": 335
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5602"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-5602"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5614"
+      },
+      "return_tokens": 79,
+      "return_characters": 316
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5614"
+      },
+      "return_tokens": 36,
+      "return_characters": 142
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5614"
+      },
+      "return_tokens": 79,
+      "return_characters": 316
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5614"
+      },
+      "return_tokens": 36,
+      "return_characters": 142
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5614"
+      },
+      "return_tokens": 79,
+      "return_characters": 316
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5614"
+      },
+      "return_tokens": 36,
+      "return_characters": 142
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5620"
+      },
+      "return_tokens": 70,
+      "return_characters": 277
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "DER",
+        "referral_id": "REF-5620"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "lookup_patient",
+      "args": {
+        "patient_id": "P-1241"
+      },
+      "return_tokens": 41,
+      "return_characters": 164
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "DER",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 57,
+      "return_characters": 227
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "DER-C1",
+        "date": "2026-09-30",
+        "time": "10:40",
+        "referral_id": "REF-5620"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5631"
+      },
+      "return_tokens": 84,
+      "return_characters": 335
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-5631"
+      },
+      "return_tokens": 25,
+      "return_characters": 98
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "CARD",
+        "band": "urgent",
+        "from": "2026-09-09",
+        "to": "2026-09-23"
+      },
+      "return_tokens": 58,
+      "return_characters": 229
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "CARD-C1",
+        "date": "2026-09-16",
+        "time": "08:30",
+        "referral_id": "REF-5631"
+      },
+      "return_tokens": 24,
+      "return_characters": 94
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5645"
+      },
+      "return_tokens": 77,
+      "return_characters": 308
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-5645"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "ORT",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 57,
+      "return_characters": 227
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5658"
+      },
+      "return_tokens": 74,
+      "return_characters": 293
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-5658"
+      },
+      "return_tokens": 34,
+      "return_characters": 135
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5658"
+      },
+      "return_tokens": 74,
+      "return_characters": 293
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-5658"
+      },
+      "return_tokens": 34,
+      "return_characters": 135
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5658"
+      },
+      "return_tokens": 74,
+      "return_characters": 293
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-5658"
+      },
+      "return_tokens": 34,
+      "return_characters": 135
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5663"
+      },
+      "return_tokens": 65,
+      "return_characters": 258
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-5663"
+      },
+      "return_tokens": 38,
+      "return_characters": 152
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5663"
+      },
+      "return_tokens": 65,
+      "return_characters": 258
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-5663"
+      },
+      "return_tokens": 38,
+      "return_characters": 152
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5663"
+      },
+      "return_tokens": 65,
+      "return_characters": 258
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-5663"
+      },
+      "return_tokens": 38,
+      "return_characters": 152
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5671"
+      },
+      "return_tokens": 71,
+      "return_characters": 281
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5671"
+      },
+      "return_tokens": 36,
+      "return_characters": 143
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5671"
+      },
+      "return_tokens": 71,
+      "return_characters": 281
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5671"
+      },
+      "return_tokens": 36,
+      "return_characters": 143
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5671"
+      },
+      "return_tokens": 71,
+      "return_characters": 281
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5671"
+      },
+      "return_tokens": 36,
+      "return_characters": 143
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 78,
+      "return_characters": 311
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 78,
+      "return_characters": 311
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 78,
+      "return_characters": 311
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-5684"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5697"
+      },
+      "return_tokens": 81,
+      "return_characters": 322
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ENT",
+        "referral_id": "REF-5697"
+      },
+      "return_tokens": 25,
+      "return_characters": 98
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "ENT",
+        "band": "urgent",
+        "from": "2026-09-09",
+        "to": "2026-09-23"
+      },
+      "return_tokens": 1,
+      "return_characters": 2
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5697"
+      },
+      "return_tokens": 81,
+      "return_characters": 322
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ENT",
+        "referral_id": "REF-5697"
+      },
+      "return_tokens": 25,
+      "return_characters": 98
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "ENT",
+        "band": "urgent",
+        "from": "2026-09-09",
+        "to": "2026-09-23"
+      },
+      "return_tokens": 1,
+      "return_characters": 2
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5697"
+      },
+      "return_tokens": 81,
+      "return_characters": 322
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ENT",
+        "referral_id": "REF-5697"
+      },
+      "return_tokens": 25,
+      "return_characters": 98
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "ENT",
+        "band": "urgent",
+        "from": "2026-09-09",
+        "to": "2026-09-23"
+      },
+      "return_tokens": 1,
+      "return_characters": 2
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 99,
+      "return_characters": 394
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 99,
+      "return_characters": 394
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 99,
+      "return_characters": 394
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-5703"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5711"
+      },
+      "return_tokens": 87,
+      "return_characters": 347
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-5711"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5711"
+      },
+      "return_tokens": 87,
+      "return_characters": 347
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-5711"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "CARD",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 29,
+      "return_characters": 116
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "CARD-C2",
+        "date": "2026-10-21",
+        "time": "10:00",
+        "referral_id": "REF-5711"
+      },
+      "return_tokens": 24,
+      "return_characters": 94
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5711"
+      },
+      "return_tokens": 87,
+      "return_characters": 347
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-5711"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "CARD",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 29,
+      "return_characters": 116
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5725"
+      },
+      "return_tokens": 80,
+      "return_characters": 317
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-5725"
+      },
+      "return_tokens": 29,
+      "return_characters": 115
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5725"
+      },
+      "return_tokens": 80,
+      "return_characters": 317
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-5725"
+      },
+      "return_tokens": 29,
+      "return_characters": 115
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5725"
+      },
+      "return_tokens": 80,
+      "return_characters": 317
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-5725"
+      },
+      "return_tokens": 29,
+      "return_characters": 115
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-5738"
+      },
+      "return_tokens": 82,
+      "return_characters": 328
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ENT",
+        "referral_id": "REF-5738"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6001"
+      },
+      "return_tokens": 70,
+      "return_characters": 278
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-6001"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-6001"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6002"
+      },
+      "return_tokens": 77,
+      "return_characters": 305
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-6002"
+      },
+      "return_tokens": 25,
+      "return_characters": 98
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "CARD",
+        "band": "urgent",
+        "from": "2026-09-09",
+        "to": "2026-09-23"
+      },
+      "return_tokens": 58,
+      "return_characters": 229
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6003"
+      },
+      "return_tokens": 68,
+      "return_characters": 271
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-6003"
+      },
+      "return_tokens": 24,
+      "return_characters": 96
+    },
+    {
+      "tool": "lookup_patient",
+      "args": {
+        "patient_id": "P-2003"
+      },
+      "return_tokens": 41,
+      "return_characters": 164
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "ORT",
+        "band": "soon",
+        "from": "2026-09-09",
+        "to": "2026-10-07"
+      },
+      "return_tokens": 28,
+      "return_characters": 111
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6004"
+      },
+      "return_tokens": 59,
+      "return_characters": 235
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "DER",
+        "referral_id": "REF-6004"
+      },
+      "return_tokens": 24,
+      "return_characters": 96
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6005"
+      },
+      "return_tokens": 70,
+      "return_characters": 277
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ENT",
+        "referral_id": "REF-6005"
+      },
+      "return_tokens": 24,
+      "return_characters": 96
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "ENT",
+        "band": "soon",
+        "from": "2026-09-09",
+        "to": "2026-10-07"
+      },
+      "return_tokens": 28,
+      "return_characters": 111
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "ENT-C2",
+        "date": "2026-10-06",
+        "time": "14:00",
+        "referral_id": "REF-6005"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6022"
+      },
+      "return_tokens": 68,
+      "return_characters": 270
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "NEU",
+        "referral_id": "REF-6022"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "NEU",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 57,
+      "return_characters": 227
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6025"
+      },
+      "return_tokens": 71,
+      "return_characters": 281
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "NEU",
+        "referral_id": "REF-6025"
+      },
+      "return_tokens": 24,
+      "return_characters": 96
+    },
+    {
+      "tool": "lookup_patient",
+      "args": {
+        "patient_id": "P-2025"
+      },
+      "return_tokens": 43,
+      "return_characters": 171
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "NEU",
+        "band": "soon",
+        "from": "2026-09-09",
+        "to": "2026-10-07"
+      },
+      "return_tokens": 28,
+      "return_characters": 111
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "NEU-C1",
+        "date": "2026-09-30",
+        "time": "13:00",
+        "referral_id": "REF-6025"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6030"
+      },
+      "return_tokens": 70,
+      "return_characters": 278
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-6030"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "as_of",
+      "args": {},
+      "return_tokens": 3,
+      "return_characters": 12
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "OPH-C2",
+        "date": "2026-10-14",
+        "time": "11:20",
+        "referral_id": "REF-6030"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6031"
+      },
+      "return_tokens": 73,
+      "return_characters": 289
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-6031"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "CARD",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 29,
+      "return_characters": 116
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "CARD-C2",
+        "date": "2026-10-21",
+        "time": "10:00",
+        "referral_id": "REF-6031"
+      },
+      "return_tokens": 24,
+      "return_characters": 94
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6032"
+      },
+      "return_tokens": 65,
+      "return_characters": 260
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ORT",
+        "referral_id": "REF-6032"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6033"
+      },
+      "return_tokens": 54,
+      "return_characters": 214
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "DER",
+        "referral_id": "REF-6033"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6034"
+      },
+      "return_tokens": 69,
+      "return_characters": 274
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "ENT",
+        "referral_id": "REF-6034"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "ENT",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 29,
+      "return_characters": 114
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "ENT-C1",
+        "date": "2026-10-21",
+        "time": "13:20",
+        "referral_id": "REF-6034"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6035"
+      },
+      "return_tokens": 68,
+      "return_characters": 270
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "NEU",
+        "referral_id": "REF-6035"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "NEU",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 57,
+      "return_characters": 227
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "NEU-C2",
+        "date": "2026-10-12",
+        "time": "10:30",
+        "referral_id": "REF-6035"
+      },
+      "return_tokens": 24,
+      "return_characters": 93
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6036"
+      },
+      "return_tokens": 64,
+      "return_characters": 254
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "OPH",
+        "referral_id": "REF-6036"
+      },
+      "return_tokens": 25,
+      "return_characters": 99
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "OPH",
+        "band": "routine",
+        "from": "2026-09-09",
+        "to": "2026-11-04"
+      },
+      "return_tokens": 85,
+      "return_characters": 340
+    },
+    {
+      "tool": "get_referral",
+      "args": {
+        "referral_id": "REF-6037"
+      },
+      "return_tokens": 69,
+      "return_characters": 275
+    },
+    {
+      "tool": "check_referral_criteria",
+      "args": {
+        "specialty": "CARD",
+        "referral_id": "REF-6037"
+      },
+      "return_tokens": 24,
+      "return_characters": 96
+    },
+    {
+      "tool": "get_clinic_slots",
+      "args": {
+        "specialty": "CARD",
+        "band": "soon",
+        "from": "2026-09-09",
+        "to": "2026-10-07"
+      },
+      "return_tokens": 29,
+      "return_characters": 113
+    },
+    {
+      "tool": "book_slot",
+      "args": {
+        "clinic": "CARD-C3",
+        "date": "2026-09-25",
+        "time": "09:30",
+        "referral_id": "REF-6037"
+      },
+      "return_tokens": 24,
+      "return_characters": 94
+    }
+  ],
+  "evaluation_summary": {
+    "trials": 50,
+    "passed": 24,
+    "pass_rate": 0.48,
+    "median_turns": 3.0,
+    "cost_usd": 0.036727
+  }
+}
