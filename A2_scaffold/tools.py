@@ -598,50 +598,50 @@ DESCRIPTORS = {
                    "case. An EMPTY existing_appointments list is normal and "
                    "means nothing is booked, which is not the same thing.",
     },
-    # "check_referral_criteria": {
-    #     "name": "check_referral_criteria",
-    #     "purpose": "Run the department's protocol against the referral's free "
-    #                "text: red flags, right department, mandatory tests, band.",
-    #     "when": "Immediately after get_referral. Its answers decide whether "
-    #             "the run continues at all.",
-    #     "args": {"specialty": "str, the code on the referral",
-    #              "referral_id": "str, the case id"},
-    #     "returns": "{red_flag_term (str or None), right_department (bool), "
-    #                "missing_tests (list), band, window_weeks}",
-    #     "failure": "Returns None when the referral or specialty does not "
-    #                "exist. IT DECIDES NOTHING - it reports five facts. Apply "
-    #                "them in order: red flag, then wrong department, then "
-    #                "missing test, then duplicate. STOP at the first that "
-    #                "fires. band 'routine' is the default when no trigger "
-    #                "phrase appears; that is normal, not a failure.",
-    # },
-"check_referral_criteria": {
-    "name": "check_referral_criteria",
-    "purpose": (
-        "Check the referral for red flags, department match, mandatory "
-        "tests, urgency band, and booking window."
-    ),
-    "when": (
-        "Run immediately after get_referral. Its result determines whether "
-        "the run should stop or continue to slot search."
-    ),
-    "args": {
-        "specialty": "str, the specialty code from the referral",
-        "referral_id": "str, the referral ID"
+    "check_referral_criteria": {
+        "name": "check_referral_criteria",
+        "purpose": "Run the department's protocol against the referral's free "
+                   "text: red flags, right department, mandatory tests, band.",
+        "when": "Immediately after get_referral. Its answers decide whether "
+                "the run continues at all.",
+        "args": {"specialty": "str, the code on the referral",
+                 "referral_id": "str, the case id"},
+        "returns": "{red_flag_term (str or None), right_department (bool), "
+                   "missing_tests (list), band, window_weeks}",
+        "failure": "Returns None when the referral or specialty does not "
+                   "exist. IT DECIDES NOTHING - it reports five facts. Apply "
+                   "them in order: red flag, then wrong department, then "
+                   "missing test, then duplicate. STOP at the first that "
+                   "fires. band 'routine' is the default when no trigger "
+                   "phrase appears; that is normal, not a failure.",
     },
-    "returns": (
-        "{red_flag_term: str or None, right_department: bool, "
-        "missing_tests: list, band: urgent|soon|routine, "
-        "window_weeks: 2|4|8}"
-    ),
-    "failure": (
-        "Returns None only when the referral or specialty does not exist. "
-        "Apply results in this order: red flag -> escalate; wrong department "
-        "-> escalate; missing_tests not empty -> request_information; "
-        "otherwise continue to duplicate and slot checks. An empty "
-        "missing_tests list means all mandatory tests are present."
-    )
-},
+# "check_referral_criteria": {
+#     "name": "check_referral_criteria",
+#     "purpose": (
+#         "Check the referral for red flags, department match, mandatory "
+#         "tests, urgency band, and booking window."
+#     ),
+#     "when": (
+#         "Run immediately after get_referral. Its result determines whether "
+#         "the run should stop or continue to slot search."
+#     ),
+#     "args": {
+#         "specialty": "str, the specialty code from the referral",
+#         "referral_id": "str, the referral ID"
+#     },
+#     "returns": (
+#         "{red_flag_term: str or None, right_department: bool, "
+#         "missing_tests: list, band: urgent|soon|routine, "
+#         "window_weeks: 2|4|8}"
+#     ),
+#     "failure": (
+#         "Returns None only when the referral or specialty does not exist. "
+#         "Apply results in this order: red flag -> escalate; wrong department "
+#         "-> escalate; missing_tests not empty -> request_information; "
+#         "otherwise continue to duplicate and slot checks. An empty "
+#         "missing_tests list means all mandatory tests are present."
+#     )
+# },
     "book_slot": {
         "name": "book_slot",
         "purpose": "Commit the appointment. THE IRREVERSIBLE STEP.",
