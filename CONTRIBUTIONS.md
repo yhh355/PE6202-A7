@@ -4,12 +4,12 @@ This file records the PE6201 A2 contribution split agreed in the team's Team Dec
 
 | Team member | Agreed primary contribution | A2 sections |
 |---|---|---|
-| Feng Hao | Tool-descriptor design; V1-to-V2 descriptor rewrite; guardrail layer | D2(b), D3 |
+| Feng Hao | Tool-descriptor design; V1-to-V2 descriptor rewrite; guardrail layer | D3 |
 | Lei Xinjie | Evaluation-case development and coverage | D4 |
 | Marcus Tay Wei Xian | Cost ledger, sensitivity analysis, and cost-to-serve model | D6 |
 | Pu Hongyu | Live-model battery coordination and results collection | D5(b) |
 | Yan Qiheng | Evaluation harness and reproducible scripted run | D4, D5(a), D7 |
-| Ye Hanhao | ReAct loop, Problem B tools, and dependency-aware parallel calling | D1, D2(a), D2(c) |
+| Ye Hanhao | ReAct loop, Problem B tools, and dependency-aware parallel calling | D1, D2 |
 
 ## Shared responsibilities
 
