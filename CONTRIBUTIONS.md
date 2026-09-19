@@ -22,4 +22,4 @@ This file records the PE6201 A2 contribution split agreed in the team's Team Dec
 
 ## Confirmation
 
-The team confirms that this contribution log was completed collectively and accurately reflects the work agreed in the Team Declaration. Individual contributions may be refined here as work is completed, with supporting commits retained in the repository history.
+The team confirms that this contribution log was completed collectively and accurately reflects the work agreed in the Team Declaration. Ye Hanhao has a larger share of the recorded commits because he was responsible for integrating the team's code, evaluation artefacts, and final repository structure.
